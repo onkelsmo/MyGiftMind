@@ -8,12 +8,15 @@
     <string name="action_gifts">Gifts</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contacts_fragment">Hello contacts_fragment</string>
+    <string name="contacts_label">Contacts</string>
+    <string name="add_fragment">Hello add_fragment</string>
+    <string name="gifts_fragment">Hello gifts_fragment</string>
+    <string name="gifts_label">Gifts</string>
 
     <string-array name="menu_titles">
         <item>Add</item>
         <item>Modify</item>
         <item>Delete</item>
     </string-array>
-
 </resources>

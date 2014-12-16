@@ -2,11 +2,13 @@ package mediasmo.mygiftmind;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -90,10 +92,8 @@ public class MainActivity extends ActionBarActivity {
         // Handle action buttons
         switch (item.getItemId()) {
             case R.id.action_contacts:
-                // TODO: implement contacts page
                 return true;
             case R.id.action_gifts:
-                // TODO: implement gifts page
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -120,7 +120,7 @@ public class MainActivity extends ActionBarActivity {
 
         // Update selected item and title, then close the drawer
         menuDrawerList.setItemChecked(position, true);
-        setTitle(menuTitles[position]);
+        //setTitle(menuTitles[position]);
         menuDrawerLayout.closeDrawer(menuDrawerList);
     }
 
@@ -140,7 +140,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
+        // Pass any configuration change to the drawer toggles
         menuDrawerToggle.onConfigurationChanged(newConfig);
     }
 
@@ -152,9 +152,8 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_contacts, container, false);
-            int i = getArguments().getInt(ARG_CONTENT_ID);
-            String content = getResources().getStringArray(R.array.menu_titles)[i];
-
+            //int i = getArguments().getInt(ARG_CONTENT_ID);
+            //String content = getResources().getStringArray(R.array.menu_titles)[i];
 
             return rootView;
 
