@@ -2,4 +2,5 @@
 <resources>
     <color name="actionbar_text">#FBFBEF</color>
     <color name="actionbar_background">#b4ffaa3c</color>
+    <color name="left_drawer_background_black">#111111</color>
 </resources>
