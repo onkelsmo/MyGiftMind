@@ -94,10 +94,16 @@ public class MainActivity extends ActionBarActivity {
             case R.id.action_contacts:
                 return true;
             case R.id.action_gifts:
+                openGifts();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openGifts() {
+        Intent intent = new Intent(this, DisplayGiftsActivity.class);
+        startActivity(intent);
     }
 
     /* The click listener for ListView in the navigation drawer */

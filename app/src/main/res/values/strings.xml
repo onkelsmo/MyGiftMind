@@ -19,4 +19,8 @@
         <item>Modify</item>
         <item>Delete</item>
     </string-array>
+
+    <string name="title_activity_display_gifts">DisplayGiftsActivity</string>
+    <string name="title_activity_display_contacts">DisplayContactsActivity</string>
+
 </resources>
