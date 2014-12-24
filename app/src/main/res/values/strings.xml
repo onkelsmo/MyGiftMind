@@ -21,5 +21,6 @@
     </string-array>
 
     <string name="title_activity_display_gifts">DisplayGiftsActivity</string>
+    <string name="title_activity_global_action_bar">GlobalActionBarActivity</string>
 
 </resources>
