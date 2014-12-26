@@ -162,7 +162,6 @@ public class MainActivity extends ActionBarActivity {
             //String content = getResources().getStringArray(R.array.menu_titles)[i];
 
             return rootView;
-
         }
     }
 }

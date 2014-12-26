@@ -2,6 +2,6 @@
     android:id="@+id/contacts"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:text="@string/contacts_fragment" />
 
