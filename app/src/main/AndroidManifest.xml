@@ -24,10 +24,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mediasmo.mygiftmind.MainActivity" />
         </activity>
-        <activity
-            android:name=".GlobalActionBarActivity"
-            android:label="@string/title_activity_global_action_bar" >
-        </activity>
     </application>
 
 </manifest>
