@@ -11,6 +11,8 @@
     <string name="contacts_fragment">Hello contacts_fragment</string>
     <string name="contacts_label">Contacts</string>
     <string name="add_fragment">Hello add_fragment</string>
+    <string name="mod_fragment">Hello mod_fragment</string>
+    <string name="del_fragment">Hello del_fragment</string>
     <string name="gifts_fragment">Hello gifts_fragment</string>
     <string name="gifts_label">Gifts</string>
 
@@ -21,6 +23,5 @@
     </string-array>
 
     <string name="title_activity_display_gifts">DisplayGiftsActivity</string>
-    <string name="title_activity_global_action_bar">GlobalActionBarActivity</string>
 
 </resources>

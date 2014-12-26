@@ -65,9 +65,11 @@ public class DisplayGiftsActivity extends ActionBarActivity {
         };
         menuDrawerLayout.setDrawerListener(menuDrawerToggle);
 
+        /*
         if (savedInstanceState == null) {
             selectItem(0);
         }
+        */
     }
 
     @Override
@@ -150,7 +152,22 @@ public class DisplayGiftsActivity extends ActionBarActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_contacts, container, false);
+            Bundle args = this.getArguments();
+            int chosenFragmentId = args.getInt("content_id");
+            int fragmentLayoutId = 0;
+
+            switch (chosenFragmentId) {
+                case 0:
+                    fragmentLayoutId = R.layout.fragment_add;
+                    break;
+                case 1:
+                    fragmentLayoutId = R.layout.fragment_mod;
+                    break;
+                case 2:
+                    fragmentLayoutId = R.layout.fragment_del;
+            }
+
+            View rootView = inflater.inflate(fragmentLayoutId, container, false);
             //int i = getArguments().getInt(ARG_CONTENT_ID);
             //String content = getResources().getStringArray(R.array.menu_titles)[i];
 
