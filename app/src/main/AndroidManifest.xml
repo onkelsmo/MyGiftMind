@@ -24,6 +24,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mediasmo.mygiftmind.MainActivity" />
         </activity>
+        <activity
+            android:name=".AddActivity"
+            android:label="@string/title_activity_add" >
+        </activity>
+        <activity
+            android:name=".ModActivity"
+            android:label="@string/title_activity_mod" >
+        </activity>
+        <activity
+            android:name=".DelActivity"
+            android:label="@string/title_activity_del" >
+        </activity>
     </application>
 
 </manifest>

@@ -13,9 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.io.Console;
 
 public class MainActivity extends ActionBarActivity {
     private String[] menuTitles;
@@ -115,6 +118,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void selectItem(int position) {
         // Update the main content by replacing fragments
+        /*
         Fragment fragment = new ContentFragment();
         Bundle args = new Bundle();
         args.putInt(ContentFragment.ARG_CONTENT_ID, position);
@@ -122,6 +126,30 @@ public class MainActivity extends ActionBarActivity {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        */
+
+        /**
+         * position can be:
+         * 0 = add
+         * 1 = mod
+         * 2 = del
+         */
+        switch (position) {
+            case 0:
+                Intent addIntent = new Intent(this, AddActivity.class);
+                startActivity(addIntent);
+                break;
+            case 1:
+                Intent modIntent = new Intent(this, ModActivity.class);
+                startActivity(modIntent);
+                break;
+            case 2:
+                Intent delIntent = new Intent(this, DelActivity.class);
+                startActivity(delIntent);
+                break;
+            default:
+                break;
+        }
 
         // Update selected item and title, then close the drawer
         menuDrawerList.setItemChecked(position, true);

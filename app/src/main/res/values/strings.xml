@@ -23,5 +23,8 @@
     </string-array>
 
     <string name="title_activity_display_gifts">DisplayGiftsActivity</string>
+    <string name="title_activity_add">AddActivity</string>
+    <string name="title_activity_mod">ModActivity</string>
+    <string name="title_activity_del">DelActivity</string>
 
 </resources>
