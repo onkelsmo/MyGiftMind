@@ -1,7 +1,6 @@
 package mediasmo.mygiftmind;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -13,12 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.io.Console;
 
 public class MainActivity extends ActionBarActivity {
     private String[] menuTitles;
@@ -136,15 +132,15 @@ public class MainActivity extends ActionBarActivity {
          */
         switch (position) {
             case 0:
-                Intent addIntent = new Intent(this, AddActivity.class);
+                Intent addIntent = new Intent(this, AddContactActivity.class);
                 startActivity(addIntent);
                 break;
             case 1:
-                Intent modIntent = new Intent(this, ModActivity.class);
+                Intent modIntent = new Intent(this, ModContactActivity.class);
                 startActivity(modIntent);
                 break;
             case 2:
-                Intent delIntent = new Intent(this, DelActivity.class);
+                Intent delIntent = new Intent(this, DelContactActivity.class);
                 startActivity(delIntent);
                 break;
             default:
@@ -177,6 +173,7 @@ public class MainActivity extends ActionBarActivity {
         menuDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    /*
     public static class ContentFragment extends Fragment {
         public static final String ARG_CONTENT_ID = "content_id";
 
@@ -206,4 +203,5 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
+    */
 }

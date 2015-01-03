@@ -8,12 +8,7 @@
     <string name="action_gifts">Gifts</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="contacts_fragment">Hello contacts_fragment</string>
     <string name="contacts_label">Contacts</string>
-    <string name="add_fragment">Hello add_fragment</string>
-    <string name="mod_fragment">Hello mod_fragment</string>
-    <string name="del_fragment">Hello del_fragment</string>
-    <string name="gifts_fragment">Hello gifts_fragment</string>
     <string name="gifts_label">Gifts</string>
 
     <string-array name="menu_titles">
@@ -23,8 +18,11 @@
     </string-array>
 
     <string name="title_activity_display_gifts">DisplayGiftsActivity</string>
-    <string name="title_activity_add">AddActivity</string>
-    <string name="title_activity_mod">ModActivity</string>
-    <string name="title_activity_del">DelActivity</string>
+    <string name="title_activity_add_contact">AddContactActivity</string>
+    <string name="title_activity_mod_contact">ModContactActivity</string>
+    <string name="title_activity_del_contact">DelContactActivity</string>
+    <string name="title_activity_add_gift">AddGiftActivity</string>
+    <string name="title_activity_mod_gift">ModGiftActivity</string>
+    <string name="title_activity_del_gift">DelGiftActivity</string>
 
 </resources>

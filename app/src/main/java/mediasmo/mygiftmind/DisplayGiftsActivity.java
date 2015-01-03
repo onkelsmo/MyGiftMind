@@ -1,7 +1,6 @@
 package mediasmo.mygiftmind;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -111,6 +110,7 @@ public class DisplayGiftsActivity extends ActionBarActivity {
     }
     private void selectItem(int position) {
         // Update the main content by replacing fragments
+        /*
         Fragment fragment = new ContentFragment();
         Bundle args = new Bundle();
         args.putInt(ContentFragment.ARG_CONTENT_ID, position);
@@ -118,6 +118,30 @@ public class DisplayGiftsActivity extends ActionBarActivity {
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        */
+
+        /**
+         * position can be:
+         * 0 = add
+         * 1 = mod
+         * 2 = del
+         */
+        switch (position) {
+            case 0:
+                Intent addIntent = new Intent(this, AddGiftActivity.class);
+                startActivity(addIntent);
+                break;
+            case 1:
+                Intent modIntent = new Intent(this, ModGiftActivity.class);
+                startActivity(modIntent);
+                break;
+            case 2:
+                Intent delIntent = new Intent(this, DelGiftActivity.class);
+                startActivity(delIntent);
+                break;
+            default:
+                break;
+        }
 
         // Update selected item and title, then close the drawer
         menuDrawerList.setItemChecked(position, true);
@@ -145,6 +169,7 @@ public class DisplayGiftsActivity extends ActionBarActivity {
         menuDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    /*
     public static class ContentFragment extends Fragment {
         public static final String ARG_CONTENT_ID = "content_id";
 
@@ -174,4 +199,5 @@ public class DisplayGiftsActivity extends ActionBarActivity {
             return rootView;
         }
     }
+    */
 }

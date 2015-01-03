@@ -25,16 +25,28 @@
                 android:value="mediasmo.mygiftmind.MainActivity" />
         </activity>
         <activity
-            android:name=".AddActivity"
-            android:label="@string/title_activity_add" >
+            android:name=".AddContactActivity"
+            android:label="@string/title_activity_add_contact" >
         </activity>
         <activity
-            android:name=".ModActivity"
-            android:label="@string/title_activity_mod" >
+            android:name=".ModContactActivity"
+            android:label="@string/title_activity_mod_contact" >
         </activity>
         <activity
-            android:name=".DelActivity"
-            android:label="@string/title_activity_del" >
+            android:name=".DelContactActivity"
+            android:label="@string/title_activity_del_contact" >
+        </activity>
+        <activity
+            android:name=".AddGiftActivity"
+            android:label="@string/title_activity_add_gift" >
+        </activity>
+        <activity
+            android:name=".DelGiftActivity"
+            android:label="@string/title_activity_del_gift" >
+        </activity>
+        <activity
+            android:name=".ModGiftActivity"
+            android:label="@string/title_activity_mod_gift" >
         </activity>
     </application>
 

@@ -6,19 +6,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ModActivity extends ActionBarActivity {
+public class AddContactActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mod);
+        setContentView(R.layout.activity_add_contact);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_mod, menu);
+        getMenuInflater().inflate(R.menu.menu_add_contact, menu);
         return true;
     }
 
