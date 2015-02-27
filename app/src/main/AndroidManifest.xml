@@ -26,27 +26,33 @@
         </activity>
         <activity
             android:name=".AddContactActivity"
-            android:label="@string/title_activity_add_contact" >
+            android:label="@string/title_activity_add_contact"
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity
             android:name=".ModContactActivity"
-            android:label="@string/title_activity_mod_contact" >
+            android:label="@string/title_activity_mod_contact"
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".DelContactActivity"
-            android:label="@string/title_activity_del_contact" >
+            android:label="@string/title_activity_del_contact"
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".AddGiftActivity"
-            android:label="@string/title_activity_add_gift" >
+            android:label="@string/title_activity_add_gift"
+            android:parentActivityName=".DisplayGiftsActivity" >
         </activity>
         <activity
             android:name=".DelGiftActivity"
-            android:label="@string/title_activity_del_gift" >
+            android:label="@string/title_activity_del_gift"
+            android:parentActivityName=".DisplayGiftsActivity" >
         </activity>
         <activity
             android:name=".ModGiftActivity"
-            android:label="@string/title_activity_mod_gift" >
+            android:label="@string/title_activity_mod_gift"
+            android:parentActivityName=".DisplayGiftsActivity" >
         </activity>
     </application>
 
