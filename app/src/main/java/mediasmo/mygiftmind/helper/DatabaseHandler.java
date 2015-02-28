@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.List;
+
+import mediasmo.mygiftmind.dao.Contact;
+
 /**
  * Created by Jan on 28.02.2015.
  */
@@ -61,4 +65,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // create tables again
         onCreate(db);
     }
-}
+
+    // TODO: implement methods
+    public void addContact(Contact contact) {}
+    public Contact getContact(int id) {}
+    public List<Contact> getAllContacts() {}
+    public int getContactsCount() {}
+    public int updateContact(Contact contact) {}
+    public void deleteContact(Contact contact) {}

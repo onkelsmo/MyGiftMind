@@ -16,8 +16,8 @@ public class Contact {
     /**
      * constructor
      *
-     * @param id
-     * @param name
+     * @param id int
+     * @param name String
      */
     public Contact(int id, String name) {
         this.id = id;
@@ -26,7 +26,7 @@ public class Contact {
     /**
      * constructor
      *
-     * @param name
+     * @param name String
      */
     public Contact(String name) {
         this.name = name;
@@ -43,7 +43,7 @@ public class Contact {
     /**
      * setId
      *
-     * @param id
+     * @param id int
      */
     public void setId(int id) {
         this.id = id;
@@ -60,7 +60,7 @@ public class Contact {
     /**
      * setName
      *
-     * @param name
+     * @param name String
      */
     public void setName(String name) {
         this.name = name;
