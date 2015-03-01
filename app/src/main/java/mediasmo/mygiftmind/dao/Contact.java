@@ -13,6 +13,8 @@ public class Contact {
      */
     private String name;
 
+    public Contact() {}
+
     /**
      * constructor
      *
