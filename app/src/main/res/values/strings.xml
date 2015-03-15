@@ -25,4 +25,7 @@
     <string name="title_activity_mod_gift">ModGiftActivity</string>
     <string name="title_activity_del_gift">DelGiftActivity</string>
 
+    <string name="contact_name">Name</string>
+    <string name="save">Save</string>
+
 </resources>

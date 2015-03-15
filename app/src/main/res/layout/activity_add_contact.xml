@@ -14,14 +14,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/contact_name"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/editTextContactName"
         android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="82dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:id="@+id/buttonSaveContact"
+        android:text="@string/save"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/editTextContactName"
+        android:layout_alignStart="@+id/editTextContactName"
+        android:onClick="saveInput" />
 
 </RelativeLayout>

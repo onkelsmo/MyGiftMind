@@ -1,17 +1,14 @@
 package mediasmo.mygiftmind;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -65,11 +62,7 @@ public class MainActivity extends ActionBarActivity {
         };
         menuDrawerLayout.setDrawerListener(menuDrawerToggle);
 
-        /*
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
-        */
+
     }
 
     @Override
@@ -113,17 +106,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void selectItem(int position) {
-        // Update the main content by replacing fragments
-        /*
-        Fragment fragment = new ContentFragment();
-        Bundle args = new Bundle();
-        args.putInt(ContentFragment.ARG_CONTENT_ID, position);
-        fragment.setArguments(args);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-        */
-
         /**
          * position can be:
          * 0 = add
@@ -172,36 +154,4 @@ public class MainActivity extends ActionBarActivity {
         // Pass any configuration change to the drawer toggles
         menuDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-    /*
-    public static class ContentFragment extends Fragment {
-        public static final String ARG_CONTENT_ID = "content_id";
-
-        public ContentFragment() { }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            Bundle args = this.getArguments();
-            int chosenFragmentId = args.getInt("content_id");
-            int fragmentLayoutId = 0;
-
-            switch (chosenFragmentId) {
-                case 0:
-                    fragmentLayoutId = R.layout.fragment_add;
-                    break;
-                case 1:
-                    fragmentLayoutId = R.layout.fragment_mod;
-                    break;
-                case 2:
-                    fragmentLayoutId = R.layout.fragment_del;
-            }
-
-            View rootView = inflater.inflate(fragmentLayoutId, container, false);
-            //int i = getArguments().getInt(ARG_CONTENT_ID);
-            //String content = getResources().getStringArray(R.array.menu_titles)[i];
-
-            return rootView;
-        }
-    }
-    */
 }

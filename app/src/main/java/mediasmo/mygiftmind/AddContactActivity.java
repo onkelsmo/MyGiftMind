@@ -2,11 +2,21 @@ package mediasmo.mygiftmind;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import mediasmo.mygiftmind.dao.Contact;
+import mediasmo.mygiftmind.helper.DatabaseHandler;
 
 
 public class AddContactActivity extends ActionBarActivity {
+
+    private Button buttonSaveContact;
+    private EditText editTextContactName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +24,9 @@ public class AddContactActivity extends ActionBarActivity {
         setContentView(R.layout.activity_add_contact);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        buttonSaveContact = (Button)findViewById(R.id.buttonSaveContact);
+        editTextContactName = (EditText)findViewById(R.id.editTextContactName);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,5 +48,13 @@ public class AddContactActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void saveInput(View view) {
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        Log.d("Insert: ", "saveInput...");
+        db.addContact(new Contact(editTextContactName.getText().toString()));
+        Log.v("editTextContactName", editTextContactName.getText().toString());
     }
 }
