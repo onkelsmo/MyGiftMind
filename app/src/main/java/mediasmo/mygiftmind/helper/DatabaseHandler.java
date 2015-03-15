@@ -112,22 +112,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     public List<Contact> getAllContacts() {
         List<Contact> contactList = new ArrayList<Contact>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
 
-        String selectQuery = "SELECT * FROM " + TABLE_CONTACTS;
-
-        // getWriteable or getReadable ??
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
+        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Contact contact = new Contact();
                 contact.setId(Integer.parseInt(cursor.getString(0)));
                 contact.setName(cursor.getString(1));
-
+                // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
         }
+
+        // return contact list
         return contactList;
     }
 
@@ -141,6 +143,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
+        db.close();
 
         return cursor.getCount();
     }

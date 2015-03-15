@@ -6,12 +6,18 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.List;
+
+import mediasmo.mygiftmind.dao.Contact;
+import mediasmo.mygiftmind.helper.DatabaseHandler;
 
 public class MainActivity extends ActionBarActivity {
     private String[] menuTitles;
@@ -62,6 +68,19 @@ public class MainActivity extends ActionBarActivity {
         };
         menuDrawerLayout.setDrawerListener(menuDrawerToggle);
 
+        try {
+            DatabaseHandler db = new DatabaseHandler(this);
+            Log.d("Reading: ", "Reading all contacts..");
+            /*
+            List<Contact> contacts = db.getAllContacts();
+            for (Contact cn : contacts) {
+                String log = "Id: " + cn.getId() + ", Name: " + cn.getName();
+                Log.d("Name: ", log);
+            }
+            */
+        } catch (Exception $e) {
+            Log.d("SQL: ", $e.getMessage());
+        }
 
     }
 
