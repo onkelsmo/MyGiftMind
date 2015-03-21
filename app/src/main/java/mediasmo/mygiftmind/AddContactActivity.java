@@ -1,5 +1,6 @@
 package mediasmo.mygiftmind;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +52,7 @@ public class AddContactActivity extends ActionBarActivity {
     }
 
     public void saveInput(View view) {
+        // Implementation via SQLite database
         DatabaseHandler db = new DatabaseHandler(this);
 
         Log.d("Insert: ", "saveInput...");

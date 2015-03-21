@@ -30,7 +30,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /**
      * Table columns
      */
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "_id";
     private static final String KEY_NAME = "name";
 
     /**
@@ -49,8 +49,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_ID + "INTEGER PRIMARY KEY, " + KEY_NAME + " TEXT)";
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + " (" +
+        KEY_ID + " INTEGER PRIMARY KEY, " + KEY_NAME + " TEXT)";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -99,14 +99,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
         }
 
-        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1));
-
-        return contact;
+        return new Contact(cursor.getInt(0), cursor.getString(1));
     }
 
     /**
      * getAllContacts
+     *
+     * http://www.mysamplecode.com/2012/07/android-listview-cursoradapter-sqlite.html
      *
      * @return List<Contact>
      */
@@ -115,20 +114,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Contact contact = new Contact();
-                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setId(cursor.getInt(0));
                 contact.setName(cursor.getString(1));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
         // return contact list
         return contactList;
     }

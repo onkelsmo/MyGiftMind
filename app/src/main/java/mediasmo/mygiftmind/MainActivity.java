@@ -2,6 +2,7 @@ package mediasmo.mygiftmind;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class MainActivity extends ActionBarActivity {
     private ActionBarDrawerToggle menuDrawerToggle;
     private CharSequence menuDrawerTitle;
     private CharSequence menuTitle;
+    private DatabaseHandler db;
+    private ListView contactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,20 +72,31 @@ public class MainActivity extends ActionBarActivity {
         };
         menuDrawerLayout.setDrawerListener(menuDrawerToggle);
 
+        db = new DatabaseHandler(this);
+        // Display Contacts from Database
+        displayContacts();
+        /*
         try {
             DatabaseHandler db = new DatabaseHandler(this);
             Log.d("Reading: ", "Reading all contacts..");
-            /*
             List<Contact> contacts = db.getAllContacts();
             for (Contact cn : contacts) {
                 String log = "Id: " + cn.getId() + ", Name: " + cn.getName();
-                Log.d("Name: ", log);
+                Log.d("Contact: ", log);
+
             }
-            */
         } catch (Exception $e) {
             Log.d("SQL: ", $e.getMessage());
         }
+        */
+    }
 
+    private void displayContacts() {
+        List<Contact> contacts = db.getAllContacts();
+        contactList = (ListView) findViewById(R.id.contact_list);
+        // Set the adapter for the list view
+        contactList.setAdapter(new ArrayAdapter<>(this,
+                R.layout.contact_list_item, contacts));
     }
 
     @Override
