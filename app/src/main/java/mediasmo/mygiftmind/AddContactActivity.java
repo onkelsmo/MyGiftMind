@@ -1,9 +1,11 @@
 package mediasmo.mygiftmind;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,22 @@ public class AddContactActivity extends ActionBarActivity {
 
         buttonSaveContact = (Button)findViewById(R.id.buttonSaveContact);
         editTextContactName = (EditText)findViewById(R.id.editTextContactName);
+
+        editTextContactName.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                    switch (keyCode) {
+                        case KeyEvent.KEYCODE_ENTER:
+                            saveInput(view);
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,11 +69,13 @@ public class AddContactActivity extends ActionBarActivity {
     }
 
     public void saveInput(View view) {
-        // Implementation via SQLite database
         DatabaseHandler db = new DatabaseHandler(this);
 
         Log.d("Insert: ", "saveInput...");
         db.addContact(new Contact(editTextContactName.getText().toString()));
         Log.v("editTextContactName", editTextContactName.getText().toString());
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
