@@ -33,14 +33,12 @@ public class AddContactActivity extends ActionBarActivity {
         editTextContactName.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                    switch (keyCode) {
-                        case KeyEvent.KEYCODE_ENTER:
-                            saveInput(view);
-                            return true;
-                        default:
-                            break;
-                    }
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) switch (keyCode) {
+                    case KeyEvent.KEYCODE_ENTER:
+                        saveInput(view);
+                        return true;
+                    default:
+                        break;
                 }
                 return false;
             }
@@ -72,10 +70,12 @@ public class AddContactActivity extends ActionBarActivity {
         DatabaseHandler db = new DatabaseHandler(this);
 
         Log.d("Insert: ", "saveInput...");
-        db.addContact(new Contact(editTextContactName.getText().toString()));
-        Log.v("editTextContactName", editTextContactName.getText().toString());
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        if (editTextContactName.getText().toString() != "") {
+            db.addContact(new Contact(editTextContactName.getText().toString()));
+            Log.v("editTextContactName", editTextContactName.getText().toString());
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        // @TODO: Message to user that input field is empty
     }
 }

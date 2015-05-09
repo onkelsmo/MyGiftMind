@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -76,20 +77,6 @@ public class MainActivity extends ActionBarActivity {
         db = new DatabaseHandler(this);
         // Display Contacts from Database
         displayContacts();
-        /*
-        try {
-            DatabaseHandler db = new DatabaseHandler(this);
-            Log.d("Reading: ", "Reading all contacts..");
-            List<Contact> contacts = db.getAllContacts();
-            for (Contact cn : contacts) {
-                String log = "Id: " + cn.getId() + ", Name: " + cn.getName();
-                Log.d("Contact: ", log);
-
-            }
-        } catch (Exception $e) {
-            Log.d("SQL: ", $e.getMessage());
-        }
-        */
     }
 
     private void displayContacts() {
@@ -110,8 +97,17 @@ public class MainActivity extends ActionBarActivity {
                 0
         );
 
-        ListView listView = (ListView)findViewById(R.id.contact_list);
+        final ListView listView = (ListView)findViewById(R.id.contact_list);
         listView.setAdapter(dataAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Cursor cursor = (Cursor)listView.getItemAtPosition(position);
+                // @TODO: take data and go to activity to show detailed data and give possibility to delete and modify data
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
