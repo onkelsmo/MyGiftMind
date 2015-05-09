@@ -15,7 +15,6 @@ import mediasmo.mygiftmind.helper.DatabaseHandler;
 
 
 public class AddContactActivity extends ActionBarActivity {
-
     private Button buttonSaveContact;
     private EditText editTextContactName;
 

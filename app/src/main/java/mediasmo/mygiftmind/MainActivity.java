@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
     private CharSequence menuDrawerTitle;
     private CharSequence menuTitle;
     private DatabaseHandler db;
-    private ListView contactList;
+    private SimpleCursorAdapter dataAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +93,25 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void displayContacts() {
-        List<Contact> contacts = db.getAllContacts();
-        contactList = (ListView) findViewById(R.id.contact_list);
-        // Set the adapter for the list view
-        contactList.setAdapter(new ArrayAdapter<>(this,
-                R.layout.contact_list_item, contacts));
+        Cursor cursor = db.getAllContacts();
+        String[] columns = new String[] {
+                DatabaseHandler.KEY_NAME,
+                DatabaseHandler.KEY_ID
+        };
+        int[] to = new int[] {
+                R.id.name,
+                R.id.key,
+        };
+        dataAdapter = new SimpleCursorAdapter(
+              this, R.layout.contact_list_item,
+                cursor,
+                columns,
+                to,
+                0
+        );
+
+        ListView listView = (ListView)findViewById(R.id.contact_list);
+        listView.setAdapter(dataAdapter);
     }
 
     @Override

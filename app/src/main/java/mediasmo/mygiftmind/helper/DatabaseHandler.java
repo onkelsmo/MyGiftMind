@@ -30,8 +30,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /**
      * Table columns
      */
-    private static final String KEY_ID = "_id";
-    private static final String KEY_NAME = "name";
+    public static final String KEY_ID = "_id";
+    public static final String KEY_NAME = "name";
 
     /**
      * constructor
@@ -107,30 +107,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      *
      * http://www.mysamplecode.com/2012/07/android-listview-cursoradapter-sqlite.html
      *
-     * @return List<Contact>
+     * @return Cursor
      */
-    public List<Contact> getAllContacts() {
-        List<Contact> contactList = new ArrayList<Contact>();
+    public Cursor getAllContacts() {
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Contact contact = new Contact();
-                contact.setId(cursor.getInt(0));
-                contact.setName(cursor.getString(1));
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+        if (cursor != null) {
+            cursor.moveToFirst();
         }
-
-        cursor.close();
-        // return contact list
-        return contactList;
+        return cursor;
     }
 
     /**
