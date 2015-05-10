@@ -10,6 +10,7 @@
     <string name="drawer_close">Close</string>
     <string name="contacts_label">Contacts</string>
     <string name="gifts_label">Gifts</string>
+    <string name="contact_details_label">Contact Details</string>
 
     <string-array name="menu_titles">
         <item>Add</item>
@@ -24,8 +25,10 @@
     <string name="title_activity_add_gift">AddGiftActivity</string>
     <string name="title_activity_mod_gift">ModGiftActivity</string>
     <string name="title_activity_del_gift">DelGiftActivity</string>
+    <string name="title_activity_contact_details">ContactDetailsActivity</string>
 
     <string name="contact_name">Name</string>
+    <string name="contact_id">ID</string>
     <string name="save">Save</string>
 
 </resources>

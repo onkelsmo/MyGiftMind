@@ -1,9 +1,11 @@
 package mediasmo.mygiftmind.dao;
 
+import java.io.Serializable;
+
 /**
  * Created by Jan on 28.02.2015.
  */
-public class Contact {
+public class Contact implements Serializable {
     /**
      * int id
      */

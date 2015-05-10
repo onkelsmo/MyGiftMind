@@ -27,7 +27,7 @@
         <activity
             android:name=".AddContactActivity"
             android:label="@string/title_activity_add_contact"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".ModContactActivity"
@@ -38,6 +38,14 @@
             android:name=".DelContactActivity"
             android:label="@string/title_activity_del_contact"
             android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".ContactDetailsActivity"
+            android:label="@string/title_activity_contact_details"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mediasmo.mygiftmind.MainActivity" />
         </activity>
         <activity
             android:name=".AddGiftActivity"

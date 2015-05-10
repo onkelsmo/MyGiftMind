@@ -105,9 +105,18 @@ public class MainActivity extends ActionBarActivity {
                 Cursor cursor = (Cursor)listView.getItemAtPosition(position);
                 // @TODO: take data and go to activity to show detailed data and give possibility to delete and modify data
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+                Contact contact = new Contact(id, name);
+
+                openContactDetailsActivity(contact);
             }
         });
+    }
+
+    private void openContactDetailsActivity(Contact contact) {
+        Intent intent = new Intent(this, ContactDetailsActivity.class);
+        intent.putExtra("ContactObject", contact);
+        startActivity(intent);
     }
 
     @Override

@@ -70,7 +70,7 @@ public class AddContactActivity extends ActionBarActivity {
         DatabaseHandler db = new DatabaseHandler(this);
 
         Log.d("Insert: ", "saveInput...");
-        if (editTextContactName.getText().toString() != "") {
+        if (editTextContactName.getText().toString().trim().length() != 0) {
             db.addContact(new Contact(editTextContactName.getText().toString()));
             Log.v("editTextContactName", editTextContactName.getText().toString());
             Intent intent = new Intent(this, MainActivity.class);

@@ -2,18 +2,21 @@ package mediasmo.mygiftmind;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
-public class DisplayGiftsActivity extends ActionBarActivity {
+import mediasmo.mygiftmind.dao.Contact;
+
+public class ContactDetailsActivity extends ActionBarActivity {
     private String[] menuTitles;
     private DrawerLayout menuDrawerLayout;
     private ListView menuDrawerList;
@@ -24,7 +27,7 @@ public class DisplayGiftsActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_gifts);
+        setContentView(R.layout.activity_contact_details);
         menuTitle = menuDrawerTitle = getTitle();
         menuTitles = getResources().getStringArray(R.array.menu_titles);
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -51,15 +54,22 @@ public class DisplayGiftsActivity extends ActionBarActivity {
         ) {
             public void onDrawerClosed(View view) {
                 getSupportActionBar().setTitle(menuTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 getSupportActionBar().setTitle(menuDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
         };
         menuDrawerLayout.setDrawerListener(menuDrawerToggle);
+        Contact contact = (Contact)getIntent().getSerializableExtra("ContactObject");
+
+        TextView contactNameTextView = (TextView)findViewById(R.id.contact_name);
+        contactNameTextView.setText(contact.getName());
+
+        //TextView contactIdTextView = (TextView)findViewById(R.id.contact_id);
+        //contactIdTextView.setText(contact.getId());
     }
 
     @Override
@@ -81,6 +91,7 @@ public class DisplayGiftsActivity extends ActionBarActivity {
                 openContacts();
                 return true;
             case R.id.action_gifts:
+                openGifts();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -92,6 +103,11 @@ public class DisplayGiftsActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    private void openGifts() {
+        Intent intent = new Intent(this, DisplayGiftsActivity.class);
+        startActivity(intent);
+    }
+
     /* The click listener for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -99,6 +115,7 @@ public class DisplayGiftsActivity extends ActionBarActivity {
             selectItem(position);
         }
     }
+
     private void selectItem(int position) {
         /**
          * position can be:
@@ -108,15 +125,16 @@ public class DisplayGiftsActivity extends ActionBarActivity {
          */
         switch (position) {
             case 0:
-                Intent addIntent = new Intent(this, AddGiftActivity.class);
+                // @TODO: change that gift can be added to the given customer here
+                Intent addIntent = new Intent(this, AddContactActivity.class);
                 startActivity(addIntent);
                 break;
             case 1:
-                Intent modIntent = new Intent(this, ModGiftActivity.class);
+                Intent modIntent = new Intent(this, ModContactActivity.class);
                 startActivity(modIntent);
                 break;
             case 2:
-                Intent delIntent = new Intent(this, DelGiftActivity.class);
+                Intent delIntent = new Intent(this, DelContactActivity.class);
                 startActivity(delIntent);
                 break;
             default:
