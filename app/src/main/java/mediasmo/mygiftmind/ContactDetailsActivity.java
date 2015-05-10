@@ -1,7 +1,10 @@
 package mediasmo.mygiftmind;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -13,8 +16,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import mediasmo.mygiftmind.dao.Contact;
+import mediasmo.mygiftmind.helper.DatabaseHandler;
 
 public class ContactDetailsActivity extends ActionBarActivity {
     private String[] menuTitles;
@@ -23,6 +28,7 @@ public class ContactDetailsActivity extends ActionBarActivity {
     private ActionBarDrawerToggle menuDrawerToggle;
     private CharSequence menuDrawerTitle;
     private CharSequence menuTitle;
+    private Contact contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +69,10 @@ public class ContactDetailsActivity extends ActionBarActivity {
             }
         };
         menuDrawerLayout.setDrawerListener(menuDrawerToggle);
-        Contact contact = (Contact)getIntent().getSerializableExtra("ContactObject");
+        contact = (Contact)getIntent().getSerializableExtra("ContactObject");
 
         TextView contactNameTextView = (TextView)findViewById(R.id.contact_name);
         contactNameTextView.setText(contact.getName());
-
-        //TextView contactIdTextView = (TextView)findViewById(R.id.contact_id);
-        //contactIdTextView.setText(contact.getId());
     }
 
     @Override
@@ -134,8 +137,24 @@ public class ContactDetailsActivity extends ActionBarActivity {
                 startActivity(modIntent);
                 break;
             case 2:
-                Intent delIntent = new Intent(this, DelContactActivity.class);
-                startActivity(delIntent);
+                AlertDialog.Builder adb = new AlertDialog.Builder(this);
+                // @TODO: do we need view?
+                //adb.setView();
+                adb.setTitle(R.string.confirm_delete);
+                adb.setIcon(android.R.drawable.ic_dialog_alert);
+                adb.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteContact();
+                    }
+                });
+                adb.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                adb.show();
                 break;
             default:
                 break;
@@ -165,5 +184,11 @@ public class ContactDetailsActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         menuDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    protected void deleteContact() {
+        DatabaseHandler db = new DatabaseHandler(this);
+        db.deleteContact(contact);
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

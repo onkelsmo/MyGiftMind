@@ -107,7 +107,6 @@ public class MainActivity extends ActionBarActivity {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
                 Contact contact = new Contact(id, name);
-
                 openContactDetailsActivity(contact);
             }
         });
