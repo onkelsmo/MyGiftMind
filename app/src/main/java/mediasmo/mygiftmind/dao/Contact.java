@@ -3,7 +3,7 @@ package mediasmo.mygiftmind.dao;
 import java.io.Serializable;
 
 /**
- * Created by Jan on 28.02.2015.
+ * Contact
  */
 public class Contact implements Serializable {
     /**
@@ -14,8 +14,6 @@ public class Contact implements Serializable {
      * String name
      */
     private String name;
-
-    public Contact() {}
 
     /**
      * constructor

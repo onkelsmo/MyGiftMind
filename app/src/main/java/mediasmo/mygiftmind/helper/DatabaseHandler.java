@@ -5,14 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import mediasmo.mygiftmind.dao.Contact;
 
 /**
- * Created by Jan on 28.02.2015.
+ * DatabaseHandler
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
     /**

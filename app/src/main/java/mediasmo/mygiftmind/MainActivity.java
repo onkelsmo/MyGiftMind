@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,14 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
-
 import mediasmo.mygiftmind.dao.Contact;
 import mediasmo.mygiftmind.helper.DatabaseHandler;
 
+/**
+ * MainActivity
+ */
 public class MainActivity extends ActionBarActivity {
     private String[] menuTitles;
     private DrawerLayout menuDrawerLayout;
@@ -33,6 +30,11 @@ public class MainActivity extends ActionBarActivity {
     private DatabaseHandler db;
     private SimpleCursorAdapter dataAdapter;
 
+    /**
+     * onCreate
+     *
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,9 @@ public class MainActivity extends ActionBarActivity {
         displayContacts();
     }
 
+    /**
+     * displayContacts
+     */
     private void displayContacts() {
         Cursor cursor = db.getAllContacts();
         String[] columns = new String[] {
@@ -112,12 +117,23 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
+    /**
+     * openContactDetailsActivity
+     *
+     * @param contact Contact
+     */
     private void openContactDetailsActivity(Contact contact) {
         Intent intent = new Intent(this, ContactDetailsActivity.class);
         intent.putExtra("ContactObject", contact);
         startActivity(intent);
     }
 
+    /**
+     * onCreateOptionsMenu
+     *
+     * @param menu Menu
+     * @return boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -125,6 +141,12 @@ public class MainActivity extends ActionBarActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * onOptionsItemSelected
+     *
+     * @param item MenuItem
+     * @return boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
@@ -145,12 +167,19 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * openGifts
+     */
     private void openGifts() {
         Intent intent = new Intent(this, DisplayGiftsActivity.class);
         startActivity(intent);
     }
 
-    /* The click listener for ListView in the navigation drawer */
+    /**
+     * DrawerItemClickListener
+     *
+     * The click listener for ListView in the navigation drawer
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -158,6 +187,11 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * selectItem
+     *
+     * @param position int
+     */
     private void selectItem(int position) {
         /**
          * position can be:
@@ -188,12 +222,22 @@ public class MainActivity extends ActionBarActivity {
         menuDrawerLayout.closeDrawer(menuDrawerList);
     }
 
+    /**
+     * setTitle
+     *
+     * @param title CharSequence
+     */
     @Override
     public void setTitle(CharSequence title) {
         menuTitle = title;
         getSupportActionBar().setTitle(menuTitle);
     }
 
+    /**
+     * onPostCreate
+     *
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -201,6 +245,11 @@ public class MainActivity extends ActionBarActivity {
         menuDrawerToggle.syncState();
     }
 
+    /**
+     * onConfigurationChanged
+     *
+     * @param newConfig Configuration
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

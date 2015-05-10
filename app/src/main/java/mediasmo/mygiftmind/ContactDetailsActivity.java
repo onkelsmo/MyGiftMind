@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.provider.ContactsContract;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -16,13 +15,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import mediasmo.mygiftmind.dao.Contact;
 import mediasmo.mygiftmind.helper.DatabaseHandler;
 
+/**
+ * ContactDetailsActivity
+ */
 public class ContactDetailsActivity extends ActionBarActivity {
-    private String[] menuTitles;
     private DrawerLayout menuDrawerLayout;
     private ListView menuDrawerList;
     private ActionBarDrawerToggle menuDrawerToggle;
@@ -30,12 +29,17 @@ public class ContactDetailsActivity extends ActionBarActivity {
     private CharSequence menuTitle;
     private Contact contact;
 
+    /**
+     * onCreate
+     *
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_details);
         menuTitle = menuDrawerTitle = getTitle();
-        menuTitles = getResources().getStringArray(R.array.menu_titles);
+        String[] menuTitles = getResources().getStringArray(R.array.menu_titles);
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         menuDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -75,6 +79,12 @@ public class ContactDetailsActivity extends ActionBarActivity {
         contactNameTextView.setText(contact.getName());
     }
 
+    /**
+     * onCreateOptionsMenu
+     *
+     * @param menu Menu
+     * @return boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -82,6 +92,12 @@ public class ContactDetailsActivity extends ActionBarActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * onOptionsItemSelected
+     *
+     * @param item MenuItem
+     * @return boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (menuDrawerToggle.onOptionsItemSelected(item)) {
@@ -101,17 +117,27 @@ public class ContactDetailsActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * openContacts
+     */
     private void openContacts() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * openGifts
+     */
     private void openGifts() {
         Intent intent = new Intent(this, DisplayGiftsActivity.class);
         startActivity(intent);
     }
 
-    /* The click listener for ListView in the navigation drawer */
+    /**
+     * DrawerItemClickListener
+     *
+     * The click listener for ListView in the navigation drawer
+     */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -119,6 +145,11 @@ public class ContactDetailsActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * selectItem
+     *
+     * @param position int
+     */
     private void selectItem(int position) {
         /**
          * position can be:
@@ -128,7 +159,7 @@ public class ContactDetailsActivity extends ActionBarActivity {
          */
         switch (position) {
             case 0:
-                // @TODO: change that gift can be added to the given customer here
+                // @TODO: implement adding gifts to actual contacts
                 Intent addIntent = new Intent(this, AddContactActivity.class);
                 startActivity(addIntent);
                 break;
@@ -138,8 +169,6 @@ public class ContactDetailsActivity extends ActionBarActivity {
                 break;
             case 2:
                 AlertDialog.Builder adb = new AlertDialog.Builder(this);
-                // @TODO: do we need view?
-                //adb.setView();
                 adb.setTitle(R.string.confirm_delete);
                 adb.setIcon(android.R.drawable.ic_dialog_alert);
                 adb.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -166,12 +195,22 @@ public class ContactDetailsActivity extends ActionBarActivity {
         menuDrawerLayout.closeDrawer(menuDrawerList);
     }
 
+    /**
+     * setTitle
+     *
+     * @param title CharSequence
+     */
     @Override
     public void setTitle(CharSequence title) {
         menuTitle = title;
         getSupportActionBar().setTitle(menuTitle);
     }
 
+    /**
+     * onPostCreate
+     *
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -179,6 +218,11 @@ public class ContactDetailsActivity extends ActionBarActivity {
         menuDrawerToggle.syncState();
     }
 
+    /**
+     * onConfigurationChanged
+     *
+     * @param newConfig Configuration
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -186,6 +230,9 @@ public class ContactDetailsActivity extends ActionBarActivity {
         menuDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    /**
+     * deleteContact
+     */
     protected void deleteContact() {
         DatabaseHandler db = new DatabaseHandler(this);
         db.deleteContact(contact);
