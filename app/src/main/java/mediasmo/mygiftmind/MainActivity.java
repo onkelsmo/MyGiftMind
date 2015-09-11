@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        // ActionBarDrawerToggle ties together the the proper interactions
+        // ActionBarDrawerToggle ties together the proper interactions
         // between the sliding drawer and the action bar app icon
         menuDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
