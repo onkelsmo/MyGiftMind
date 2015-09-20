@@ -1,25 +1,21 @@
 package mediasmo.mygiftmind;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBarDrawerToggle;
-
 import mediasmo.mygiftmind.Fragments.TabFragment;
 import mediasmo.mygiftmind.dao.Contact;
 import mediasmo.mygiftmind.helper.DatabaseHandler;
@@ -29,7 +25,6 @@ import mediasmo.mygiftmind.helper.DatabaseHandler;
  */
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout menuDrawerLayout;
-    private CharSequence menuTitle;
     private DatabaseHandler db;
     private SimpleCursorAdapter dataAdapter;
     private NavigationView menuNavigationView;
@@ -49,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame, new TabFragment());
+        fragmentTransaction.replace(R.id.content_frame, new TabFragment()).commit();
 
         menuNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -80,16 +75,9 @@ public class MainActivity extends AppCompatActivity {
         menuDrawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-
-        // Enable ActionBar app icon to behave as action to toggle nav drawer
-        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);*/
-
-
-
         db = new DatabaseHandler(this);
         // Display Contacts from Database
-        //displayContacts();
+        displayContacts();
     }
 
     /**

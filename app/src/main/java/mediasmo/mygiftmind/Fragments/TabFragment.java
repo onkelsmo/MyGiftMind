@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ResourceBundle;
+
 import mediasmo.mygiftmind.R;
 
 public class TabFragment extends Fragment {
@@ -54,7 +56,6 @@ public class TabFragment extends Fragment {
             return null;
         }
 
-
         @Override
         public int getCount() {
             return int_items;
@@ -64,9 +65,9 @@ public class TabFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0 :
-                    return "Contacts";
+                    return getString(R.string.contacts_label);
                 case 1 :
-                    return "Gift";
+                    return getString(R.string.gifts_label);
             }
             return null;
         }
