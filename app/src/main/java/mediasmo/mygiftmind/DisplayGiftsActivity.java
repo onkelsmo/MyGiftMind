@@ -69,7 +69,7 @@ public class DisplayGiftsActivity extends ActionBarActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
+  /*  @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (menuDrawerToggle.onOptionsItemSelected(item)) {
             return true;
@@ -86,7 +86,7 @@ public class DisplayGiftsActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+*/
     private void openContacts() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

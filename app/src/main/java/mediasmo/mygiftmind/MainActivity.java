@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,25 +17,26 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.app.ActionBarDrawerToggle;
+
+import mediasmo.mygiftmind.Fragments.TabFragment;
 import mediasmo.mygiftmind.dao.Contact;
 import mediasmo.mygiftmind.helper.DatabaseHandler;
 
 /**
  * MainActivity
  */
-public class MainActivity extends ActionBarActivity {
-    private String[] menuTitles;
+public class MainActivity extends AppCompatActivity {
     private DrawerLayout menuDrawerLayout;
-    private ListView menuDrawerList;
-    private ActionBarDrawerToggle menuDrawerToggle;
-    private CharSequence menuDrawerTitle;
     private CharSequence menuTitle;
     private DatabaseHandler db;
     private SimpleCursorAdapter dataAdapter;
+    private NavigationView menuNavigationView;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     /**
-     * onCreate
-     *
      * @param savedInstanceState Bundle
      */
     @Override
@@ -40,45 +44,52 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        menuTitle = menuDrawerTitle = getTitle();
-        menuTitles = getResources().getStringArray(R.array.menu_titles);
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        menuDrawerList = (ListView) findViewById(R.id.left_drawer);
+        menuNavigationView = (NavigationView) findViewById(R.id.left_drawer);
 
-        // Set the adapter for the list view
-        menuDrawerList.setAdapter(new ArrayAdapter<>(this,
-                R.layout.drawer_list_item, menuTitles));
-        // Set the list's click listener
-        menuDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_frame, new TabFragment());
+
+        menuNavigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuDrawerLayout.closeDrawers();
+
+                if (menuItem.getItemId() == R.id.nav_item_contacts) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame, new TabFragment()).commit();
+                }
+                /*if (menuItem.getItemId() == R.id.nav_item_settings) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame, new SettingsFragment()).commit();
+                }*/
+                return false;
+            }
+        });
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(
+                this,
+                menuDrawerLayout,
+                toolbar,
+                R.string.app_name,
+                R.string.app_name);
+
+        menuDrawerLayout.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
 
         // Enable ActionBar app icon to behave as action to toggle nav drawer
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);*/
 
-        // ActionBarDrawerToggle ties together the proper interactions
-        // between the sliding drawer and the action bar app icon
-        menuDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                menuDrawerLayout,         /* DrawerLayout object */
-                R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle(menuTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
 
-            public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle(menuDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-        menuDrawerLayout.setDrawerListener(menuDrawerToggle);
 
         db = new DatabaseHandler(this);
         // Display Contacts from Database
-        displayContacts();
+        //displayContacts();
     }
 
     /**
@@ -107,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Cursor cursor = (Cursor)listView.getItemAtPosition(position);
+                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
                 // @TODO: take data and go to activity to show detailed data and give possibility to delete and modify data
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
@@ -128,132 +139,25 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    /**
-     * onCreateOptionsMenu
-     *
-     * @param menu Menu
-     * @return boolean
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
-    /**
-     * onOptionsItemSelected
-     *
-     * @param item MenuItem
-     * @return boolean
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // The action bar home/up action should open or close the drawer.
-        // ActionBarDrawerToggle will take care of this.
-        if (menuDrawerToggle.onOptionsItemSelected(item)) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
             return true;
         }
 
-        // Handle action buttons
-        switch (item.getItemId()) {
-            case R.id.action_contacts:
-                return true;
-            case R.id.action_gifts:
-                openGifts();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * openGifts
-     */
-    private void openGifts() {
-        Intent intent = new Intent(this, DisplayGiftsActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * DrawerItemClickListener
-     *
-     * The click listener for ListView in the navigation drawer
-     */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
-
-    /**
-     * selectItem
-     *
-     * @param position int
-     */
-    private void selectItem(int position) {
-        /**
-         * position can be:
-         * 0 = add
-         * 1 = mod
-         * 2 = del
-         */
-        switch (position) {
-            case 0:
-                Intent addIntent = new Intent(this, AddContactActivity.class);
-                startActivity(addIntent);
-                break;
-            case 1:
-                Intent modIntent = new Intent(this, ModContactActivity.class);
-                startActivity(modIntent);
-                break;
-            case 2:
-                Intent delIntent = new Intent(this, DelContactActivity.class);
-                startActivity(delIntent);
-                break;
-            default:
-                break;
-        }
-
-        // Update selected item and title, then close the drawer
-        menuDrawerList.setItemChecked(position, true);
-        //setTitle(menuTitles[position]);
-        menuDrawerLayout.closeDrawer(menuDrawerList);
-    }
-
-    /**
-     * setTitle
-     *
-     * @param title CharSequence
-     */
-    @Override
-    public void setTitle(CharSequence title) {
-        menuTitle = title;
-        getSupportActionBar().setTitle(menuTitle);
-    }
-
-    /**
-     * onPostCreate
-     *
-     * @param savedInstanceState Bundle
-     */
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        menuDrawerToggle.syncState();
-    }
-
-    /**
-     * onConfigurationChanged
-     *
-     * @param newConfig Configuration
-     */
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
-        menuDrawerToggle.onConfigurationChanged(newConfig);
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -97,7 +97,7 @@ public class ContactDetailsActivity extends ActionBarActivity {
      *
      * @param item MenuItem
      * @return boolean
-     */
+     *//*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (menuDrawerToggle.onOptionsItemSelected(item)) {
@@ -115,7 +115,7 @@ public class ContactDetailsActivity extends ActionBarActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     /**
      * openContacts

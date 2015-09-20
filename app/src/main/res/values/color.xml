@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="actionbar_text">#FBFBEF</color>
-    <color name="actionbar_background">#b4ffaa3c</color>
+    <color name="actionbar_background">#ffa842</color>
     <color name="left_drawer_background_black">#111111</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
 </resources>
