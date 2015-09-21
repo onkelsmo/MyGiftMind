@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 menuDrawerLayout.closeDrawers();
 
+                // TODO: define content of navigation Drawer
                 if (menuItem.getItemId() == R.id.nav_item_contacts) {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.content_frame, new TabFragment()).commit();
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         menuDrawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
+        //setContentView(R.layout.contact_layout);
+
         db = new DatabaseHandler(this);
         // Display Contacts from Database
         displayContacts();
@@ -94,26 +97,29 @@ public class MainActivity extends AppCompatActivity {
                 R.id.key,
         };
         dataAdapter = new SimpleCursorAdapter(
-              this, R.layout.contact_list_item,
+                this,
+                R.layout.contact_list_item,
                 cursor,
                 columns,
                 to,
                 0
         );
 
-        final ListView listView = (ListView)findViewById(R.id.contact_list);
-        listView.setAdapter(dataAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
-                // @TODO: take data and go to activity to show detailed data and give possibility to delete and modify data
-                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
-                Contact contact = new Contact(id, name);
-                openContactDetailsActivity(contact);
-            }
-        });
+        final ListView listView = (ListView) findViewById(R.id.contact_list);
+        //if (listView != null) {
+            listView.setAdapter(dataAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    Cursor cursor = (Cursor) listView.getItemAtPosition(position);
+                    // @TODO: take data and go to activity to show detailed data and give possibility to delete and modify data
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                    int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+                    Contact contact = new Contact(id, name);
+                    openContactDetailsActivity(contact);
+                }
+            });
+        //}
     }
 
     /**
